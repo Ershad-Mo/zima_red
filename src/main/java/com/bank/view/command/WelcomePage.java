@@ -8,21 +8,36 @@ public class WelcomePage {
         LoginPage customerLogin = new LoginPage();
         RigesterPage rigesterCustomer = new RigesterPage();
 
-        System.out.println("Hi, and welcome to our bank press one of the next numbers to continue ..." + 
+        int key10;
+        do{
+            
+            System.out.println("\n\n\nHi, and welcome to our bank press one of the next numbers to continue ..." + 
             " \n 1 : loging \n 2 : rigester \n 3 : exit");
 
-        while(true){
             System.out.print("key: ");
             int key = ZimaRed.scanner.nextInt();
             ZimaRed.scanner.nextLine();
+            key10 = key;
             
             if(key <= 3 && key >= 1){
                 switch(key){
                     case 1:
+                    // System.out.println("if you wanna go back press 0 or 1 to continue ");
+                    // int key1 = ZimaRed.scanner.nextInt();
+                    // ZimaRed.scanner.nextLine();
+                    // if(key1 == 0){
+                    //     break;
+                    // }
                         customerLogin.login();
-                        break;
-                        
+                    break;
+
                     case 2:
+                    // System.out.println("if you wanna go back press 0 or 1 to continue ");
+                    // int key2 = ZimaRed.scanner.nextInt();
+                    // ZimaRed.scanner.nextLine();
+                    // if(key2 == 0){
+                    //     break;
+                    // }
                         rigesterCustomer.Add();
                         break;
                         
@@ -34,7 +49,7 @@ public class WelcomePage {
                 }else{
                 System.out.println(" please enter your choise correctly");
             }
-        }
+        }while(key10 != 3);
     }
 }
 

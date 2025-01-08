@@ -10,13 +10,12 @@ import com.bank.service.impl.CustomerServiceImpl;
 public class RigesterPage {
 
     private final CustomerService customerService;
+    int key10 = 0;
 
     public RigesterPage() {
         this.customerService = new CustomerServiceImpl();
     }
     public void Add(){
-        String passWord = "";
-        
         Customer customer = new Customer();
         CustomerRepository customerRepository = new CustomerRepository();
         System.out.print("\n please set a user name for your account: ");
@@ -27,8 +26,6 @@ public class RigesterPage {
                 else
                     System.out.println("your username cannot be less than 5 letter");
 
-            
-
         System.out.print("\n please set a password for your account: ");
         String password = ZimaRed.scanner.nextLine();
 
@@ -38,10 +35,24 @@ public class RigesterPage {
                 String repassword = ZimaRed.scanner.nextLine();
                 if(repassword.equals(password)){
 
-                    customer.setPassWord(passWord);
+                    customer.setPassWord(password);
                     try{
                         customerService.addCustomer(customer);
                         System.out.println("your account has been created successfully...");
+                        do{
+                            System.out.println("wlcome mr/ms " + userName + "..." );
+                            System.out.println("what do you wanna do? " + 
+                            " \n 1. deposit" + " \n 2. withdraw" + 
+                            " \n 3.balance " + "\n 4. go to the main menu");
+                            System.out.print("key: ");
+                            int key = ZimaRed.scanner.nextInt();
+                            ZimaRed.scanner.nextLine();
+                            key10 = key;
+            
+                            if(key > 4 || key < 1)
+                                System.out.println("plaese enter one of following numbers ");
+            
+                        }while(key10 != 4);
                     }catch(CustomerExistException e){
                         System.out.println("this username already exist, try another one...");
                     }

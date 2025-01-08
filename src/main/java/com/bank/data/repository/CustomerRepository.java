@@ -6,7 +6,7 @@ import java.util.List;
 import com.bank.data.entity.Customer;
 
 public class CustomerRepository {
-    public List<Customer> customers = new ArrayList<>();
+    public static final List<Customer> customers = new ArrayList<>();
 
     public void save(Customer customer){
         customers.add(customer);
@@ -30,12 +30,16 @@ public class CustomerRepository {
         return false;
     }
 
-    public boolean existByUsernameAndPassword(String userName, String passWord){
+    public boolean existByUsernameAndpassword(String userName, String password){
         for(Customer customer : customers){
-            if(customer.getUserName().equals(userName) && customer.getPassWord().equals(passWord)){
+            if(customer.getUserName().equals(userName) && customer.getPassWord().equals(password)){
                 return true;
             }
         }
+        return false;
+    }
+
+    public boolean existByUsernameAndPassword(String username, String password) {
         return false;
     }
 }
