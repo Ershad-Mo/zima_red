@@ -26,9 +26,11 @@ public class LoginPage {
 
             try{
                 authenticateService.login(userName, password);
+                System.out.println();
                 System.out.println("you have logined successfully");
 
                 do{
+                System.out.println();
                 System.out.println("wlcome mr/ms " + userName + "..." );
                 System.out.println("what do you wanna do? " + 
                 " \n 1. deposit" + " \n 2. withdraw" + 

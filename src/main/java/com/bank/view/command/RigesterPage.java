@@ -38,8 +38,10 @@ public class RigesterPage {
                     customer.setPassWord(password);
                     try{
                         customerService.addCustomer(customer);
+                        System.out.println();
                         System.out.println("your account has been created successfully...");
                         do{
+                            System.out.println();
                             System.out.println("wlcome mr/ms " + userName + "..." );
                             System.out.println("what do you wanna do? " + 
                             " \n 1. deposit" + " \n 2. withdraw" + 

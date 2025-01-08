@@ -42,6 +42,7 @@ public class WelcomePage {
                         break;
                         
                     case 3:
+                        System.out.println();
                         System.out.println("goodbye babe");
                         System.exit(0);
                         break;                   

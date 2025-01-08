@@ -40,6 +40,13 @@ public class CustomerRepository {
     }
 
     public boolean existByUsernameAndPassword(String username, String password) {
+        for(Customer customer : customers)
+            if(customerExists(customer, username, password)) return true;
         return false;
+    }
+
+    private boolean customerExists(Customer customer, String username, String password) {
+        return customer.getUserName().equals(username) && customer.getPassWord().equals(password);
+
     }
 }
