@@ -1,5 +1,4 @@
 package com.bank.view.command;
-
 import com.bank.ZimaRed;
 
 public class WelcomePage {
@@ -11,9 +10,9 @@ public class WelcomePage {
         int key10;
         do{
             
-            System.out.println("\n\n\nHi, and welcome to our bank press one of the next numbers to continue ..." + 
+            System.out.println("\nHi, and welcome to our bank press one of the next numbers to continue ..." + 
             " \n 1 : loging \n 2 : rigester \n 3 : exit");
-
+            System.out.println();
             System.out.print("key: ");
             int key = ZimaRed.scanner.nextInt();
             ZimaRed.scanner.nextLine();
@@ -22,24 +21,12 @@ public class WelcomePage {
             if(key <= 3 && key >= 1){
                 switch(key){
                     case 1:
-                    // System.out.println("if you wanna go back press 0 or 1 to continue ");
-                    // int key1 = ZimaRed.scanner.nextInt();
-                    // ZimaRed.scanner.nextLine();
-                    // if(key1 == 0){
-                    //     break;
-                    // }
                         customerLogin.login();
                     break;
 
                     case 2:
-                    // System.out.println("if you wanna go back press 0 or 1 to continue ");
-                    // int key2 = ZimaRed.scanner.nextInt();
-                    // ZimaRed.scanner.nextLine();
-                    // if(key2 == 0){
-                    //     break;
-                    // }
                         rigesterCustomer.Add();
-                        break;
+                    break;
                         
                     case 3:
                         System.out.println();
