@@ -4,7 +4,6 @@ import com.bank.ZimaRed;
 import com.bank.service.AuthenticateService;
 import com.bank.service.exception.CustomerNotExistException;
 import com.bank.service.impl.AuthenticateServiceImpl;
-import com.bank.service.impl.CardServiceImpl;
 import com.bank.view.security.AuthenticatedCustomer;
 
 public class LoginPage {

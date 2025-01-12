@@ -4,7 +4,6 @@ import java.security.SecureRandom;
 import java.time.LocalDate;
 
 import com.bank.data.entity.BankAccount;
-import com.bank.data.entity.Customer;
 import com.bank.data.repository.BankAccountrepository;
 import com.bank.service.BankAccountService;
 import com.bank.service.exception.BankAccountNotFoundException;
@@ -30,7 +29,7 @@ public class BankAccountServiceImpl implements BankAccountService {
 
     private String generateAccountNumber() {
         StringBuilder accountNumber = new StringBuilder();
-        for(int i = 0; i < 15; i++) accountNumber.append(String.valueOf(random.nextInt(10)));
+        for(int i = 0; i < 5; i++) accountNumber.append(String.valueOf(random.nextInt(10)));
         return accountNumber.toString();
     }
 

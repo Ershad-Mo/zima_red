@@ -1,7 +1,5 @@
 package com.bank.service.impl;
 
-import com.bank.ZimaRed;
-import com.bank.data.entity.BankAccount;
 import com.bank.service.CardService;
 
 public class CardServiceImpl implements CardService{
