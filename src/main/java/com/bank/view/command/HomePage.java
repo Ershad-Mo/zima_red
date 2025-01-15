@@ -20,12 +20,14 @@ public class HomePage {
     private final WithdrawService withdrawService;
     private final DepositService depositService;
     private final TransferService transferService;
+    private final Show show;
 
     public HomePage() {
+        this.bankAccountService = new BankAccountServiceImpl();
         this.withdrawService = new WithdrawServiceImpl();
         this.depositService = new DepositServiceImpl();
-        this.bankAccountService = new BankAccountServiceImpl();
         this.transferService = new TransferServiceImpl();
+        this.show = new Show();
     }
 
     public void showHomeMenu(){
@@ -49,11 +51,7 @@ public class HomePage {
                     System.out.print("please enter the amount you want to deposit: ");
                     double depositAmount = ZimaRed.scanner.nextDouble();
                     depositService.deposit(accountNumber, depositAmount);
-                    System.out.print("---------------------------\n");
-                    System.out.println("Your Account Number: " + accountNumber);
-                    System.out.print("---------------------------\n");
-                    System.out.print("your new balance is: " + bankAccountService.getCustomerbalance(AuthenticatedCustomer.logedInCustomer));
-                    System.out.println("\n---------------------------");
+                    show.showBalance();
                 break;
 
                 case 2:
@@ -61,24 +59,14 @@ public class HomePage {
                     double withdrawAmount = ZimaRed.scanner.nextDouble();
                     try {
                         withdrawService.withdraw(accountNumber, withdrawAmount);
-                        System.out.print("---------------------------\n");
-                        System.out.println("Your Account Number: " + accountNumber);
-                        System.out.print("---------------------------\n");
-                        System.out.print("your new balance is: " + bankAccountService.getCustomerbalance(AuthenticatedCustomer.logedInCustomer));
-                        System.out.println("\n---------------------------");
+                        show.showBalance();
                     }catch(InsufficientBalanceException e){
-                        System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
-                        System.out.print("not enough balance\n");
-                        System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                        show.showException("not enough balance");
                     }
                     break;
 
                 case 3:
-                    System.out.print("---------------------------\n");
-                    System.out.println("Your Account Number: " + accountNumber);
-                    System.out.print("---------------------------\n");
-                    System.out.print("your new balance is: " + bankAccountService.getCustomerbalance(AuthenticatedCustomer.logedInCustomer));
-                    System.out.println("\n---------------------------");
+                    show.showBalance();
                     break;
 
                 case 4:
@@ -90,30 +78,20 @@ public class HomePage {
                     double transferAmount = ZimaRed.scanner.nextDouble();
                     try {
                             transferService.transfer(reciverAccountNumber, accountNumber, transferAmount);
-                            System.out.print("---------------------------\n");
-                            System.out.println("Your Account Number: " + accountNumber);
-                            System.out.print("---------------------------\n");
-                            System.out.print("your new balance is: " + bankAccountService.getCustomerbalance(AuthenticatedCustomer.logedInCustomer));
-                            System.out.println("\n---------------------------");
+                            show.showBalance();
                     }catch(InsufficientBalanceException e) {
-                        System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
-                        System.out.print("not enough balance\n");
-                        System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                        show.showException("not enough balance");
                     }catch(SenderIsAlsoReciverException e){
-                        System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
-                        System.out.print("You cannot transfer money from your bank account to the same source account\n");
-                        System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                        show.showException("You cannot transfer money from your bank account to the same source account");
                     }catch(BankAccountNotFoundException e) {
-                        System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
-                        System.out.print("bank account not found try another one...\n");
-                        System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                        show.showException("bank account not found try another one...");
                     }
                     break;
 
                 case 5:
                     System.out.println("main menu...");
                     break;
-
+                    
                 default:
                     System.out.println("plaese enter one of following numbers ");
                     break;
