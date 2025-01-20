@@ -3,6 +3,7 @@ package com.bank.service.impl;
 import com.bank.data.entity.BankAccount;
 import com.bank.data.repository.BankAccountrepository;
 import com.bank.service.WithdrawService;
+import com.bank.service.exception.AmountNotValid;
 import com.bank.service.exception.BankAccountNotFoundException;
 import com.bank.service.exception.InsufficientBalanceException;
 
@@ -14,7 +15,13 @@ public class WithdrawServiceImpl implements WithdrawService{
     }
 
     @Override
-    public void withdraw(String accountNumber, double amount) {
+    public void withdraw(String accountNumber, Double amount) {
+
+        if(amount <= 0)
+            throw new AmountNotValid();
+
+        if(amount.equals(null))
+            throw new AmountNotValid();
 
         BankAccount bankAccount = bankAccountrepository.findFirstByAccountNumber(accountNumber)
             .orElseThrow(() -> new BankAccountNotFoundException());

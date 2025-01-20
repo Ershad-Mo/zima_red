@@ -2,6 +2,7 @@ package com.bank.service.impl;
 import com.bank.data.entity.BankAccount;
 import com.bank.data.repository.BankAccountrepository;
 import com.bank.service.TransferService;
+import com.bank.service.exception.AmountNotValid;
 import com.bank.service.exception.BankAccountNotFoundException;
 import com.bank.service.exception.InsufficientBalanceException;
 import com.bank.service.exception.SenderIsAlsoReciverException;
@@ -15,16 +16,22 @@ public class TransferServiceImpl implements TransferService{
     }
 
     @Override
-    public void transfer(String reciverAccountNumber, String senderAccountNumber, double amount) {
+    public void transfer(String distination, String source, Double amount) {
 
-        BankAccount senderBankAccount = bankAccountrepository.findFirstByAccountNumber(senderAccountNumber)
-            .orElseThrow(() -> new BankAccountNotFoundException());
+        if(amount <= 0)
+            throw new AmountNotValid();
 
-        BankAccount reciverBankAccount = bankAccountrepository.findFirstByAccountNumber(reciverAccountNumber)
+        if(amount.equals(null))
+            throw new AmountNotValid();
+
+        BankAccount senderBankAccount = bankAccountrepository.findFirstByAccountNumber(source)
             .orElseThrow(() -> new BankAccountNotFoundException());
 
         if(amount > senderBankAccount.getBalance())
             throw new InsufficientBalanceException();
+
+        BankAccount reciverBankAccount = bankAccountrepository.findFirstByAccountNumber(distination)
+            .orElseThrow(() -> new BankAccountNotFoundException());
             
         if(reciverBankAccount.getAccountNumber().equals(senderBankAccount.getAccountNumber()))
             throw new SenderIsAlsoReciverException();

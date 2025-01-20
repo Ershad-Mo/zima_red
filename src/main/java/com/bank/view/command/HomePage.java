@@ -51,15 +51,15 @@ public class HomePage {
                     System.out.print("please enter the amount you want to deposit: ");
                     double depositAmount = ZimaRed.scanner.nextDouble();
                     depositService.deposit(accountNumber, depositAmount);
-                    show.showBalance();
-                break;
+                    show.showTransaction(AuthenticatedCustomer.logedInCustomer, depositAmount, accountNumber, "1", "added to");
+                    break;
 
                 case 2:
                     System.out.print("please enter the amount you want to deposit: ");
                     double withdrawAmount = ZimaRed.scanner.nextDouble();
                     try {
                         withdrawService.withdraw(accountNumber, withdrawAmount);
-                        show.showBalance();
+                        show.showTransaction(AuthenticatedCustomer.logedInCustomer, withdrawAmount, accountNumber, "1", "gone from");
                     }catch(InsufficientBalanceException e){
                         show.showException("not enough balance");
                     }
@@ -72,13 +72,13 @@ public class HomePage {
                 case 4:
                     System.out.println("enter the account number that you want transfer money to it...");
                     System.out.print("account number: ");
-                    String reciverAccountNumber = ZimaRed.scanner.nextLine(); 
+                    String distinationAccountNumber = ZimaRed.scanner.nextLine(); 
                     System.out.println("now please enter the amount that you want to transfer...");
                     System.out.print("amount: ");
                     double transferAmount = ZimaRed.scanner.nextDouble();
                     try {
-                            transferService.transfer(reciverAccountNumber, accountNumber, transferAmount);
-                            show.showBalance();
+                            transferService.transfer(distinationAccountNumber, accountNumber, transferAmount);
+                            show.showTransaction(AuthenticatedCustomer.logedInCustomer, transferAmount, accountNumber, distinationAccountNumber, " ");
                     }catch(InsufficientBalanceException e) {
                         show.showException("not enough balance");
                     }catch(SenderIsAlsoReciverException e){
