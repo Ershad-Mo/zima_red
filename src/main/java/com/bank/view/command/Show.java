@@ -3,14 +3,18 @@ package com.bank.view.command;
 import java.time.LocalDate;
 
 import com.bank.service.BankAccountService;
+import com.bank.service.CardService;
 import com.bank.service.impl.BankAccountServiceImpl;
+import com.bank.service.impl.CardServiceImpl;
 import com.bank.view.security.AuthenticatedCustomer;
 
 public class Show {
     private final BankAccountService bankAccountService;
+    private final CardService cardService;
 
     public Show() {
         this.bankAccountService = new BankAccountServiceImpl();
+        this.cardService = new CardServiceImpl();
     }
 
 
@@ -53,6 +57,20 @@ public class Show {
             System.out.println("date: " + LocalDate.now());
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         }
+    }
+
+    public void showTheCard(String username) {
+        System.out.println();
+        System.out.println();
+        System.out.println("??????????????????????????????");
+        System.out.println(username);
+        System.out.println("??????????????????????????????");
+        System.out.println(cardService.getCardNumber(username));
+        System.out.println("??????????????????????????????");
+        System.out.println("cvv2: " + cardService.getCardcvv2(username)+
+                "\texpiy date: " + cardService.getCardExpiry(username));
+        System.out.println("??????????????????????????????");
+        System.out.println();
 
     }
 }
