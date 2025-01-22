@@ -3,10 +3,20 @@ package com.bank.data.entity;
 import java.time.LocalDate;
 
 public class Card {
+    
+    private String username;
     private String cvv2;
     private String cardNum;
     private LocalDate expiry;
-    private String username;
+
+
+    public Card(String username, String cvv2, String cardNum, LocalDate expiry) {
+        this.username = username;
+        this.cvv2 = cvv2;
+        this.cardNum = cardNum;
+        this.expiry = expiry;
+    }
+
 
     public String getUsername() {
         return username;

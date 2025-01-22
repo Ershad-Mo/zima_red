@@ -2,6 +2,7 @@ package com.bank.view.command;
 
 import com.bank.ZimaRed;
 import com.bank.service.BankAccountService;
+import com.bank.service.CardService;
 import com.bank.service.DepositService;
 import com.bank.service.TransferService;
 import com.bank.service.WithdrawService;
@@ -9,6 +10,7 @@ import com.bank.service.exception.BankAccountNotFoundException;
 import com.bank.service.exception.InsufficientBalanceException;
 import com.bank.service.exception.SenderIsAlsoReciverException;
 import com.bank.service.impl.BankAccountServiceImpl;
+import com.bank.service.impl.CardServiceImpl;
 import com.bank.service.impl.DepositServiceImpl;
 import com.bank.service.impl.TransferServiceImpl;
 import com.bank.service.impl.WithdrawServiceImpl;
@@ -21,6 +23,7 @@ public class HomePage {
     private final DepositService depositService;
     private final TransferService transferService;
     private final Show show;
+    private final CardService cardService;
 
     public HomePage() {
         this.bankAccountService = new BankAccountServiceImpl();
@@ -28,6 +31,7 @@ public class HomePage {
         this.depositService = new DepositServiceImpl();
         this.transferService = new TransferServiceImpl();
         this.show = new Show();
+        this.cardService = new CardServiceImpl();
     }
 
     public void showHomeMenu(){
@@ -38,7 +42,7 @@ public class HomePage {
             System.out.print("wlcome mr/ms " + AuthenticatedCustomer.logedInCustomer + "...\t" );
             System.out.println("what do you wanna do? " + 
             " \n 1. deposit" + " \n 2. withdraw" + "\n 3. Get Balance" + 
-            " \n 4. transfer money" + "\n 5. go to the main menu");
+            " \n 4. transfer money" + "\n 5. go to the main menu" + "\n 6. card order");
             System.out.println();
             System.out.print("key: ");
             int key = ZimaRed.scanner.nextInt();
@@ -91,6 +95,10 @@ public class HomePage {
                 case 5:
                     System.out.println("main menu...");
                     break;
+
+                case 6:
+                    cardService.createCardForCustomer(AuthenticatedCustomer.logedInCustomer);
+                    show.showTheCard(AuthenticatedCustomer.logedInCustomer);
                     
                 default:
                     System.out.println("plaese enter one of following numbers ");

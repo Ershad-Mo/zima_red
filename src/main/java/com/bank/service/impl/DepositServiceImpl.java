@@ -3,7 +3,6 @@ package com.bank.service.impl;
 import com.bank.data.entity.BankAccount;
 import com.bank.data.entity.enumeration.TransactionType;
 import com.bank.data.repository.BankAccountrepository;
-import com.bank.data.repository.TransactionRepository;
 import com.bank.service.DepositService;
 import com.bank.service.TransactionService;
 import com.bank.service.dto.TransactionDto;
