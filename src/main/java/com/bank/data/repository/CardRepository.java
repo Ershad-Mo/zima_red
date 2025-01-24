@@ -15,17 +15,20 @@ public class CardRepository {
     }
 
     public boolean existByCvv2(String cvv2){
-        for(Card card : cards){
-            if(card.getCvv2().equals(cvv2)){
-                return true;
-            }
-        }
-        return false;
+        return cards.stream().anyMatch(card -> card.getCvv2().equals(cvv2));
     }
 
-    public Optional<Card> findFirstByUsername(String username) {
+    public boolean existByCardNumber(String cardNumber){
+        return cards.stream().anyMatch(card -> card.getCardNum().equals(cardNumber));
+    }
+
+    public boolean existByAccountNumber(String accountNumber){
+        return cards.stream().anyMatch(card -> card.getAccountNumber().equals(accountNumber));
+    }
+
+    public Optional<Card> findFirstByAccountNumber(String accountNumber) {
         return cards.stream()
-            .filter(card -> card.getUsername().equals(username))
+            .filter(card -> card.getAccountNumber().equals(accountNumber))
             .findFirst();
     }
     

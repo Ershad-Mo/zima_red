@@ -4,27 +4,26 @@ import java.time.LocalDate;
 
 public class Card {
     
-    private String username;
     private String cvv2;
     private String cardNum;
     private LocalDate expiry;
+    private String accountNumber;
 
 
-    public Card(String username, String cvv2, String cardNum, LocalDate expiry) {
-        this.username = username;
+    public Card(String accountNumber, String cvv2, String cardNum, LocalDate expiry) {
         this.cvv2 = cvv2;
         this.cardNum = cardNum;
         this.expiry = expiry;
+        this.accountNumber = accountNumber;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
     }
 
 
-    public String getUsername() {
-        return username;
-    }
-
-
-    public void setUsername(String username) {
-        this.username = username;
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
 

@@ -6,6 +6,7 @@ import com.bank.service.CardService;
 import com.bank.service.DepositService;
 import com.bank.service.TransferService;
 import com.bank.service.WithdrawService;
+import com.bank.service.exception.ActivecardExistException;
 import com.bank.service.exception.BankAccountNotFoundException;
 import com.bank.service.exception.InsufficientBalanceException;
 import com.bank.service.exception.SenderIsAlsoReciverException;
@@ -97,9 +98,12 @@ public class HomePage {
                     break;
 
                 case 6:
-                    cardService.createCardForCustomer(AuthenticatedCustomer.logedInCustomer);
-                    show.showTheCard(AuthenticatedCustomer.logedInCustomer);
-                    
+                    try {
+                        cardService.createCardForCustomer(accountNumber);
+                        show.showTheCard(accountNumber);
+                    }catch(ActivecardExistException e) {
+                        show.showException("this account alreadyn has an active card");
+                    }
                 default:
                     System.out.println("plaese enter one of following numbers ");
                     break;
