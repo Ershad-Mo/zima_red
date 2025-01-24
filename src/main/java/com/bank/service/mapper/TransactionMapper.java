@@ -9,7 +9,7 @@ public class TransactionMapper {
     private static TransactionMapper instance;
 
     private TransactionMapper() {
-
+        
     }
 
     public static TransactionMapper getInstance() {
