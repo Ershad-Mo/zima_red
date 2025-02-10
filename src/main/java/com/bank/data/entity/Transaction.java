@@ -29,6 +29,29 @@ public class Transaction {
     public void setId(String id) {
         this.id = id;
     }
-    
-    
+
+
+    public TransactionType getType() {
+        return type;
+    }
+
+    public String getDistinationAccountNumber() {
+        return distinationAccountNumber;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public LocalDateTime getCreationTime() {
+        return creationTime;
+    }
+
+    public String getSourceAccountNumber() {
+        return sourceAccountNumber;
+    }
+
+    public String getId() {
+        return id;
+    }
 }

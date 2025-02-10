@@ -14,7 +14,7 @@ public class CustomerRepository {
 
     public boolean existByUsername(String userName){
         for(Customer customer : customers){
-            if(customer.getUserName().equals(userName)){
+            if(customer.getUserName().equals(userName)) {
                 return true;
             }
         }

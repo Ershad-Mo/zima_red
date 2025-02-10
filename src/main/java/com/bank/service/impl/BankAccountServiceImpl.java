@@ -4,7 +4,7 @@ import java.security.SecureRandom;
 import java.time.LocalDate;
 
 import com.bank.data.entity.BankAccount;
-import com.bank.data.repository.BankAccountrepository;
+import com.bank.data.databaserepository.BankAccountrepository;
 import com.bank.service.BankAccountService;
 import com.bank.service.exception.BankAccountNotFoundException;
 
@@ -19,7 +19,7 @@ public class BankAccountServiceImpl implements BankAccountService {
     
     @Override
     public void createBankAccountForCustomer(String customerUsername){
-        BankAccount bankAccount = new BankAccount(customerUsername,
+        BankAccount bankAccount = new BankAccount(null, customerUsername,
          generateAccountNumber(),
           LocalDate.now(), 
           0d);
@@ -36,14 +36,14 @@ public class BankAccountServiceImpl implements BankAccountService {
     @Override
     public double getCustomerbalance(String customerUsername) {
         return bankAccountrepository.findFirstByUsername(customerUsername) 
-            .orElseThrow(() -> new BankAccountNotFoundException())
+            .orElseThrow(BankAccountNotFoundException::new)
             .getBalance();
     }
 
     @Override
     public String getAccountNumber(String customerUsername) {
         return bankAccountrepository.findFirstByUsername(customerUsername) 
-            .orElseThrow(() -> new BankAccountNotFoundException())
+            .orElseThrow(BankAccountNotFoundException::new)
             .getAccountNumber();
     }
 }

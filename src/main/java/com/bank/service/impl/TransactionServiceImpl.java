@@ -3,7 +3,7 @@ package com.bank.service.impl;
 import java.util.UUID;
 
 import com.bank.data.entity.Transaction;
-import com.bank.data.repository.TransactionRepository;
+import com.bank.data.databaserepository.TransactionRepository;
 import com.bank.service.TransactionService;
 import com.bank.service.dto.TransactionDto;
 import com.bank.service.mapper.TransactionMapper;

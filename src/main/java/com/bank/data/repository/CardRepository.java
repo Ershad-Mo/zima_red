@@ -3,8 +3,9 @@ package com.bank.data.repository;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import com.bank.data.entity.Card;
 
+import com.bank.data.entity.BankAccount;
+import com.bank.data.entity.Card;
 
 public class CardRepository {
     private static final Set<Card> cards = new HashSet<>();
@@ -31,5 +32,10 @@ public class CardRepository {
             .filter(card -> card.getAccountNumber().equals(accountNumber))
             .findFirst();
     }
-    
+
+    public Optional<Card> findFirstByCardNumber(String cardNumber) {
+        return cards.stream()
+                .filter(card -> card.getCardNum().equals(cardNumber))
+                .findFirst();
+    }
 }

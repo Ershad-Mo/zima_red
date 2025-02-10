@@ -5,12 +5,14 @@ import java.util.Objects;
 
 public class BankAccount {
 
+    private final Integer id;
     private final String customerUsername;
     private final String accountNumber;
     private final LocalDate creationDate;
     private double balance;
 
-    public BankAccount(String customerUsername, String accountNumber, LocalDate creationDate, double balance) {
+    public BankAccount(Integer id, String customerUsername, String accountNumber, LocalDate creationDate, double balance) {
+        this.id = id;
         this.customerUsername = customerUsername;
         this.accountNumber = accountNumber;
         this.creationDate = creationDate;
@@ -49,4 +51,7 @@ public class BankAccount {
         return Objects.equals(accountNumber, that.accountNumber);
     }
 
+    public Integer getId() {
+        return id;
+    }
 }
