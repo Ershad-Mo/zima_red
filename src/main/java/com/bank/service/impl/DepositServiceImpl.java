@@ -2,7 +2,7 @@ package com.bank.service.impl;
 
 import com.bank.data.entity.BankAccount;
 import com.bank.data.entity.enumeration.TransactionType;
-import com.bank.data.repository.BankAccountrepository;
+import com.bank.data.databaserepository.BankAccountrepository;
 import com.bank.service.DepositService;
 import com.bank.service.TransactionService;
 import com.bank.service.dto.TransactionDto;
@@ -33,7 +33,7 @@ public class DepositServiceImpl implements DepositService {
             .orElseThrow(() -> new BankAccountNotFoundException());
 
             bankAccount.setBalance(bankAccount.getBalance() + amount);
-            bankAccountrepository.save(bankAccount);
+            bankAccountrepository.updateBalance(bankAccount);
 
             TransactionDto transactionDto = new TransactionDto(accountNumber, accountNumber, amount, TransactionType.WITHDRAW);
             transactionService.createTransaction(transactionDto);

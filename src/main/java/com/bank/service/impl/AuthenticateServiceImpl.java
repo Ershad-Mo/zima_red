@@ -1,6 +1,7 @@
 package com.bank.service.impl;
 
-import com.bank.data.repository.CustomerRepository;
+
+import com.bank.data.databaserepository.CustomerRepository;
 import com.bank.service.AuthenticateService;
 import com.bank.service.exception.CustomerNotExistException;
 

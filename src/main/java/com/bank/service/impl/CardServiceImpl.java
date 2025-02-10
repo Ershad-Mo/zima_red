@@ -2,11 +2,15 @@ package com.bank.service.impl;
 
 import java.security.SecureRandom;
 import java.time.LocalDate;
+import java.util.Objects;
+import java.util.Optional;
 
 import com.bank.data.entity.Card;
-import com.bank.data.repository.CardRepository;
+import com.bank.data.entity.enumeration.CardActivity;
+import com.bank.data.databaserepository.CardRepository;
 import com.bank.service.CardService;
 import com.bank.service.exception.ActivecardExistException;
+import com.bank.service.exception.BankAccountNotFoundException;
 import com.bank.service.exception.CardNotFoundException;
 
 public class CardServiceImpl implements CardService {
@@ -21,11 +25,11 @@ public class CardServiceImpl implements CardService {
     }
 
     public void createCardForCustomer(String accountNumber) {
-        
-        if(cardRepository.existByAccountNumber(accountNumber))
+        Optional<CardActivity> cardActivity = getActivity(accountNumber);
+        if(cardActivity.isPresent() && cardActivity.get().equals(CardActivity.ISACTIVE))
             throw new ActivecardExistException();
         
-        Card card = new Card(accountNumber, generateCvv2(), generateCardNumber(), LocalDate.now().plusYears(5));
+        Card card = new Card(accountNumber, generateCvv2(), generateCardNumber(), LocalDate.now().plusYears(5), CardActivity.ISACTIVE);
         cardRepository.save(card);
     }
 
@@ -51,21 +55,50 @@ public class CardServiceImpl implements CardService {
     @Override
     public String getCardcvv2(String accountNumber) {
         return cardRepository.findFirstByAccountNumber(accountNumber) 
-            .orElseThrow(() -> new CardNotFoundException())
+            .orElseThrow(CardNotFoundException::new)
             .getCvv2();
     }
 
     @Override
     public LocalDate getCardExpiry(String accountNumber) {
         return cardRepository.findFirstByAccountNumber(accountNumber) 
-            .orElseThrow(() -> new CardNotFoundException())
+            .orElseThrow(CardNotFoundException::new)
             .getExpiry();
     }
 
     @Override
     public String getCardNumber(String accountNumber) {
         return cardRepository.findFirstByAccountNumber(accountNumber) 
-            .orElseThrow(() -> new CardNotFoundException())
+            .orElseThrow(CardNotFoundException::new)
             .getCardNum();
     }
+
+    @Override
+    public String cardExistance(String accountNumber) {
+        return cardRepository.existByAccountNumber(accountNumber) ? "reorder" : "order";
+    }
+
+    @Override
+    public String getAccountNumber(String cardNumber) {
+        return cardRepository.findFirstByAccountNumber(cardNumber)
+                .orElseThrow(() -> new BankAccountNotFoundException())
+                .getAccountNumber();
+    }
+
+    @Override
+    public Optional<CardActivity> getActivity(String accountNumber) {
+        return cardRepository.findFirstByAccountNumber(accountNumber)
+                .map(Card::getStatus);
+    }
+
+    @Override
+    public void InActiveMyCard(String accountNumber) {
+         cardRepository.findFirstByAccountNumber(accountNumber)
+                .orElseThrow(() -> new BankAccountNotFoundException())
+                .setStatus(CardActivity.ISNOTACTIVE);
+    }
+
+
+
+
 }
